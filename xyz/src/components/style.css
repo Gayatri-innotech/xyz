@@ -1,0 +1,55 @@
+* {
+    background: lightseagreen;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title{
+    background: seagreen;
+}
+.boxx{
+    background: seagreen;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 200;
+    font-size: large;
+}
+
+.box {
+    border: 1px solid seagreen;
+    background: seagreen;
+    margin: 50px;
+    border-radius: 15px;
+    padding-bottom: 40px;
+    height: 100%;
+}
+.boxe{
+    background: seagreen;
+    font-size: large;
+    font-weight: 600;
+}
+
+.boxes{
+    width: 30%;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: lightgray;
+    margin-top: 8px;
+}
+
+.btn {
+    width: 20%;
+    height: 25px;
+    border: none;
+    padding: 10px;
+    background-color: cadetblue;
+    font-size: 15px;
+    border-radius: 5px;
+}
+.btns{
+    background-color: seagreen;
+    color: black;
+    
+}
