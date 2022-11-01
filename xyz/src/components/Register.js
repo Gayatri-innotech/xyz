@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { signUpUser } from '../redux/authSlice';
+import { signUpUser } from '../redux/reducer/authSlice';
 import { useNavigate } from 'react-router-dom';
 import './style.css'
 
@@ -23,20 +23,20 @@ const Register = () => {
   }
 
   return (
-    <div className='box'>
-      <h2 className='title'>Register</h2>
+    <div className='contain'>
+      <h2 className='sub'>Register</h2>
       <label htmlFor='' className='boxe'>Username</label><br />
-      <input type='text' className='boxes' placeholder='Username' value={name} onChange={(e) => setName(e.target.value)} /><br /><br />
+      <input type='text' className='boxes' placeholder='Username' value={name} onChange={(e) => setName(e.target.value)} /><br />
       {err && name.length <= 0 ?
-        <label>Username can't be empty!</label> : ''}<br /><br />
+        <label>Username can't be empty!</label> : ''}<br /><br/>
       <label htmlFor='' className='boxe'>Password</label><br />
-      <input type='password' className='boxes' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} /><br /><br />
-      {err && password.length <= 0 ? <label>Password can't be empty!</label> : ''} <br /><br />
+      <input type='password' className='boxes' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} /><br />
+      {err && password.length <= 0 ? <label>Password can't be empty!</label> : ''} <br /><br/>
       <label htmlFor='' className='boxe'>User</label>
       <input type='radio' className='btnn' name='role' value='user' onChange={(e) => setRole(e.target.value)} /><br />
       <label htmlFor='' className='boxe'>Admin</label>
       <input type='radio' name='role' value='admin' onChange={(e) => setRole(e.target.value)} /><br /><br />
-      <button onClick={registerHandle} className='btn'>Register</button>
+      <button onClick={registerHandle} className='btn1'>Register</button>
     </div>
   )
 }
