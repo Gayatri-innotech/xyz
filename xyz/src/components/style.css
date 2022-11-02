@@ -1,12 +1,12 @@
-* {
+/* * {
     background: lightseagreen;
     text-align: center;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
+} */
 
-.title{
+.sub{
     background: seagreen;
 }
 .boxx{
@@ -16,7 +16,7 @@
     font-size: large;
 }
 
-.box {
+.contain {
     border: 1px solid seagreen;
     background: seagreen;
     margin: 50px;
@@ -39,17 +39,27 @@
     margin-top: 8px;
 }
 
-.btn {
+.btn1 {
     width: 20%;
     height: 25px;
     border: none;
-    padding: 10px;
     background-color: cadetblue;
     font-size: 15px;
     border-radius: 5px;
 }
+
 .btns{
     background-color: seagreen;
     color: black;
-    
+}
+
+.card {
+    width: 200px;
+    float: right;
+    margin: 5px;
+}
+
+.btn {
+    float: right;
+    margin: 5px;
 }
