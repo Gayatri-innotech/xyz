@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { PostApiAction } from '../redux/action/action';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export const Forms = () => {
 
@@ -10,7 +11,7 @@ export const Forms = () => {
     const [option3, setOption3] = useState('');
     const [option4, setOption4] = useState('');
 
-
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     // const isResponse = useSelector((state) => state.reducer.isResponse);
     const titleHandler = (e) => {
@@ -39,6 +40,7 @@ export const Forms = () => {
             option4: option4,
         };
         dispatch(PostApiAction(finalData));
+        navigate('/homes')
         // console.log('****', finalData);
     };
 

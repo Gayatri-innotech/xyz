@@ -19,13 +19,8 @@ const Login = () => {
 
   useEffect(() => {
     if (authState?.token) {
-      navigate('/userPoll')
-    } 
-    // if (role===admin) {
-    //   navigate('/homes')
-    // } else {
-    //   navigate('/userPoll')
-    // }
+      navigate('/homes')
+    }
   }, [authState])
 
   return (

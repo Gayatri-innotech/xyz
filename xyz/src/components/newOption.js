@@ -12,7 +12,7 @@ export const NewOption = () => {
 
 
     const dispatch = useDispatch();
-    // const isResponse = useSelector((state) => state.reducer.isResponse);
+
     const titleHandler = (e) => {
         setTitle(e.target.value)
     }
@@ -39,12 +39,9 @@ export const NewOption = () => {
             option4: option4,
         };
         dispatch(PostApiAction(finalData));
-        // console.log('****', finalData);
     };
 
-    // if (isResponse) {
-    //     alert('Add New Poll Sucessfully');
-    // }
+
     return (
         <div className='container add'>
             <h1>Add New Poll</h1>

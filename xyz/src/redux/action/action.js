@@ -47,13 +47,14 @@ const PostApiAction = (request) => {
     };
 };
 
-const PostVoteApiAction = (request, id) => {
+const PostVoteApiAction = (request) => {
+    console.log('REQ', request);
     return function (dispatch) {
         // dispatch({
         //     type: 'POST_VOTE_DETAILS',
         //     payload: false,
         // });
-        return PostVoteApiDetails(request, id).then((res) => {
+        return PostVoteApiDetails(request).then((res) => {
             console.log('PostVoteApiDetails Response', res);
             dispatch({
                 type: 'POST_VOTE_DETAILS',
@@ -95,13 +96,13 @@ const DeleteApiAction = (id) => {
     };
 };
 
-const DeleteOptionApiAction = (request, id) => {
+const DeleteOptionApiAction = (request) => {
     return function (dispatch) {
         // dispatch({
         //     type: 'DELETE_OPTION_DETAILS',
         //     payload: false,
         // })
-        return DeleteOptionApiDetails(request, id).then((res) => {
+        return DeleteOptionApiDetails(request).then((res) => {
             console.log('DeleteOptionApiAction Response', res);
             dispatch({
                 type: 'DELETE_OPTION_DETAILS',

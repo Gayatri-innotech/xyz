@@ -37,11 +37,11 @@ const PostApiDetails = (data) => {
     return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/add_poll?title=${data['title']}%20Poll&options=${data['option1']}____${data['option2']}____${data['option3']}____${data['option4']}`, 'POST', headers, data);
 };
 
-const PostVoteApiDetails = (data, id) => {
+const PostVoteApiDetails = (payload) => {
     const headers = {
         'Content-Type': 'application/json',
     };
-    return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/do_vote?option_text=nodejs&id=` + id, 'POST', headers, data);
+    return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/do_vote?option_text=${payload.option}&id=` + payload.id, 'POST', headers, payload);
 };
 
 const GetDetailsById = (id) => {
@@ -65,12 +65,11 @@ const DeleteApiDetails = (id) => {
     return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/delete_poll?id=` + id, 'DELETE', headers, {});
 };
 
-const DeleteOptionApiDetails = (id, data) => {
+const DeleteOptionApiDetails = (payload) => {
     const headers = {
         'Content-Type': 'application/json',
     };
-    console.log('----', id);
-    return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/delete_poll_option?option_text=shi&id=` + id, 'DELETE', headers, {});
+    return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/delete_poll_option?option_text=${payload.option}&id=` + payload.pollid, 'DELETE', headers, payload);
 };
 
 const PostOptionApiDetails = (data, id) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Store from './redux/store';
@@ -11,35 +11,35 @@ import UserPoll from './components/userPoll';
 import Login from './components/Login';
 import Register from './components/Register';
 import Form from './components/form';
-
+import ProtectedRoutes from './ProtectedRoutes';
 
 function App() {
-  const Private = () => {
-    const data = localStorage.getItem('data');
-    console.log(data, 'kjdbkja');
-    if(!data) {
-      return <Navigate to={'/'}/>
-    } else {
-      return <Outlet/>
-    }
-  }
+  // const Private = () => {
+  //   const data = localStorage.getItem('data');
+  //   console.log(data, 'kjdbkja');
+  //   if(!data) {
+  //     return <Navigate to={'/'}/>
+  //   } else {
+  //     return <Outlet/>
+  //   }
+  // }
   return (
     <div className="App">
       <Provider store={Store}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<Login/>}/>
-            <Route path='/reg' element={<Register/>}/>
-            <Route element={<Private/>}>
-            
+            <Route path='/' element={<Login />} />
+            <Route path='/reg' element={<Register />} />
+            <Route path='/protect'element={<ProtectedRoutes/>}>
+              <Route path='/homes' element={<AdminHome/>}/>
             </Route>
-            <Route  path='/homes' element={<AdminHome />} />
-            <Route  path='/form' element={<Forms />} />
-            <Route path='/forms/:id' element={<Form/>}/>
-            <Route  path='/user' element={<Users />} />
-            <Route  path='/userPoll' element={<UserPoll />} />
-            <Route  path='/edit/:id' element={<UpdateDetails />} />
-            <Route path='*' element={<p>There's nothing here: 404</p>}/>
+            {/* <Route path='/homes' element={<AdminHome/>}/> */}
+            <Route path='/form' element={<Forms />} />
+            <Route path='/forms/:id' element={<Form />} />
+            <Route path='/user' element={<Users />} />
+            <Route path='/userPoll' element={<UserPoll />} />
+            <Route path='/edit/:id' element={<UpdateDetails />} />
+            <Route path='*' element={<p>There's nothing here: 404</p>} />
           </Routes>
         </BrowserRouter>
       </Provider>

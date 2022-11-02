@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetApiAction, DeleteApiAction, DeleteOptionApiAction } from '../redux/action/action';
+import { GetApiAction, DeleteApiAction, DeleteOptionApiAction, PostVoteApiAction } from '../redux/action/action';
 import { Link } from 'react-router-dom';
 
 const AdminHome = () => {
-    const dispatch = useDispatch();
+    const [option, setOption] = useState();
+    const [id, setIde] = useState();
+
     const responseData = useSelector((state) => state.reducer.details);
-    const deleteOption = useSelector((state) => state.reducer.deleteOption);
-    // console.log('-*-*-*-', deleteOption);
+    const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(GetApiAction());
     }, [dispatch]);
 
     const result = responseData ? responseData.map((data, index) => {
-        // console.log('DATA----', data['options']);
         return (
             <div key={index}>
                 <div className="card">
@@ -29,19 +30,23 @@ const AdminHome = () => {
                         {data.options.map((item, index) =>
                             <h6 key={index}>
                                 <span >
-                                    <span
-                                        onClick={() => dispatch(DeleteOptionApiAction(data._id))}>
-                                        X
-                                    </span> &nbsp;
-                                    <input className='form-check-input' type="radio" name={data['_id']} />
+                                    <span name={data['_id']} value={item.option}
+                                    />&nbsp; {item.option} &nbsp;&nbsp;
+                                    <button type="button" className="btn btn-outline-primary"
+                                        onClick={() => dispatch(PostVoteApiAction({ id: data._id, option: item.option }))}>
+                                        Submit Vote</button>
+
+                                    <span className="remove" value={item.option}
+                                        onClick={() => dispatch(DeleteOptionApiAction({ pollid: data._id, option: item.option }))}>X
+                                    </span>
                                 </span> &nbsp;
-                                {item.option}
                             </h6>
                         )}
-                        <Link to={`/forms/${data._id}`}>
+                        <Link to={`/forms1/${data._id}`}>
                             <button type="button" className="btn btn-outline-warning">Add New Options</button>
                         </Link>
-                        <button type="button" className="btn btn-outline-danger" onClick={() => dispatch(DeleteApiAction(data._id))}>Delete Poll</button>
+                        <button type="button" className="btn btn-outline-danger"
+                            onClick={() => dispatch(DeleteApiAction(data._id))}>Delete Poll</button>
                     </div>
                 </div>
             </div >
@@ -50,8 +55,9 @@ const AdminHome = () => {
     return (
         <div className='container'>
             <h1>Admin Poll Page</h1><br />
+
             <Link to='/'>
-                <button type='button' className='btn btn-primary'>Logout</button>
+                <button type="button" className="btn btn-outline-primary">Logout</button>
             </Link>
             <Link to='/form'>
                 <button type="button" className="btn btn-outline-success">Add New Poll</button>
@@ -59,9 +65,6 @@ const AdminHome = () => {
             <Link to='/user'>
                 <button type="button" className="btn btn-outline-info">List Users</button>
             </Link><br /><br />
-            {/* <Link to='/'>
-                <button>User Page</button>
-            </Link><br /><br /> */}
             <h1>{result}</h1>
         </div>
     )
