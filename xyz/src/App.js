@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Form from './components/form';
 import ProtectedRoutes from './ProtectedRoutes';
+import NewOption from './components/newOption';
 
 function App() {
   // const Private = () => {
@@ -30,10 +31,10 @@ function App() {
           <Routes>
             <Route path='/' element={<Login />} />
             <Route path='/reg' element={<Register />} />
-            <Route path='/protect'element={<ProtectedRoutes/>}>
-              <Route path='/homes' element={<AdminHome/>}/>
-            </Route>
-            {/* <Route path='/homes' element={<AdminHome/>}/> */}
+            {/* <Route element={<ProtectedRoutes/>}>
+              {/* <Route path='/homes' element={<AdminHome/>}/> */}
+            <Route path='/new' element={<NewOption/>}/>
+            <Route path='/homes' element={<AdminHome/>}/>
             <Route path='/form' element={<Forms />} />
             <Route path='/forms/:id' element={<Form />} />
             <Route path='/user' element={<Users />} />

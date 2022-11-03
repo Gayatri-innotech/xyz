@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { GetApiUserAction } from '../redux/action/action';
 
 const Users = () => {
@@ -22,7 +23,9 @@ const Users = () => {
     })
     return (
         <div className='container'>
-
+            <Link to='/homes'>
+                <button className='btn btn-outline-primary'>Back</button>
+            </Link>
             <table className="table">
                 <thead className="thead-dark">
                     <tr>

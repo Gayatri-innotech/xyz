@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { PostApiAction } from '../redux/action/action';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Forms = () => {
 
@@ -56,6 +56,10 @@ export const Forms = () => {
             <input onChange={(e) => optionHandler3(e)} className='form-control' placeholder='Add Option 3' type="text" /><br />
             <input onChange={(e) => optionHandler4(e)} className='form-control' placeholder='Add Option 4' type="text" /><br />
             <button onClick={(e) => { clickHandler(e) }} className='btn btn-info'>Submit</button>
+            <Link to='/homes'>
+                <button className='btn btn-outline-primary'>Back</button>
+            </Link>
+
         </div>
     )
 }

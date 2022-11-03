@@ -41,6 +41,9 @@ export const UpdateDetails = () => {
             <Link to=''>
                 <button onClick={(e) => { clickHandler(e) }} className='btn btn-info'>Update Details</button>
             </Link>
+            <Link to='/homes'>
+                <button className='btn btn-outline-info'>Back</button>
+            </Link>
         </div>
     )
 }

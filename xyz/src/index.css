@@ -16,12 +16,22 @@ table{
   width: 100px;
 }
 .remove{
-  background-color: gray;
-  color: white;
+  color: black;
   font-size: 12px;
   position: absolute;
   right: 0;
   margin: 5px;
   padding: 2px;
-  border-radius: 3px;
+  border: none;
 }
+.del {
+  float: right;
+}
+.inp {
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  height: 40px;
+  margin-top: 25px;
+}
+
