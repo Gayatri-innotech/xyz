@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { signUpUser } from '../redux/reducer/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './style.css'
 import { useForm } from 'react-hook-form'
 
@@ -40,7 +40,7 @@ const Register = () => {
         onChange={(e) => setName(e.target.value)} /><br />
 
       {err && name.length <= 0 ?
-        <label>Username can't be empty!</label> : ''}<br /><br />
+        <label className='error'>Username can't be empty!</label> : ''}<br /><br />
 
       <label htmlFor='' className='boxe'>Password</label><br />
       <input
@@ -50,7 +50,7 @@ const Register = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)} /><br />
 
-      {err && password.length <= 0 ? <label>Password can't be empty!</label> : ''} <br /><br />
+      {err && password.length <= 0 ? <label className='error'>Password can't be empty!</label> : ''} <br /><br />
 
       
         <label htmlFor='' className='boxe'>User</label>
@@ -70,7 +70,8 @@ const Register = () => {
           {...register('userType', { required: 'User Type is Required' })}
           onChange={(e) => setRole(e.target.value)} /><br/>
           {errors.userType && <span>{errors.userType.message}</span>}<br/><br/>
-          <button onClick={registerHandle} className='btn1'>Register</button>
+          <button onClick={registerHandle} className='btn1'>Register</button><br/>
+          <NavLink className='btns' to='/'>Go Back</NavLink>
 
       </form>
         <div>

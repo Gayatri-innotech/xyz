@@ -35,3 +35,10 @@ table{
   margin-top: 25px;
 }
 
+.error {
+  color:#660000;
+  width: 20%;
+  height: 30px;
+  margin-top: 10px;
+  padding: 3px;
+}

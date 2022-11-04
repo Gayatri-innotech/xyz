@@ -38,9 +38,8 @@ export const UpdateDetails = () => {
         <div className='container'>
             <h1>Edit Details</h1>
             <input defaultValue={title} onChange={(e) => titleHandler(e)} type="text" placeholder='Add Title' className='form-control' /> <br />
-            <Link to=''>
+            
                 <button onClick={(e) => { clickHandler(e) }} className='btn btn-info'>Update Details</button>
-            </Link>
             <Link to='/homes'>
                 <button className='btn btn-outline-info'>Back</button>
             </Link>

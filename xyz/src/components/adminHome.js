@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetApiAction, DeleteApiAction, DeleteOptionApiAction, PostVoteApiAction } from '../redux/action/action';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Button from 'react-bootstrap/Button';
@@ -14,8 +14,14 @@ const AdminHome = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const navigate = useNavigate();
     const responseData = useSelector((state) => state.reducer.details);
     const dispatch = useDispatch();
+
+    const handleOut =() => {
+        localStorage.clear('')
+        navigate('/')
+    }
 
     useEffect(() => {
         dispatch(GetApiAction());
@@ -68,8 +74,19 @@ const AdminHome = () => {
                                 <span >
                                     <input type="radio" className="btn btn-outline-primary"
                                          />
+                                         
                                     <span name={data['_id']} value={item.option} />
                                     {item.option}
+
+                                    {/* {data.option2.map((item, index) => {
+                                        <>
+                                        <h6> key = {index}</h6>
+                                        <input type="radio" className="btn btn-outline-primary"
+                                        />
+                                        <span name={data['_id']} value={item.option2} />
+                                    {item.option2}
+                                        </>
+                                    })} */}
 
 
 
@@ -94,10 +111,8 @@ const AdminHome = () => {
     return (
         <div className='container'>
             <h1>Admin Poll Page</h1><br />
-
-            <Link to='/'>
-                <button type="button" className="btn btn-outline-primary">Logout</button>
-            </Link>
+                <button type="button" onClick={handleOut} className="btn btn-outline-primary">Logout</button>
+            
             <Link to='/form'>
                 <button type="button" className="btn btn-outline-success">Add New Poll</button>
             </Link>
