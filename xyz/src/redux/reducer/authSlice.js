@@ -29,7 +29,6 @@ export const signInUser = createAsyncThunk('signinuser', async (body) => {
     return await res.json();
 })
 
-
 const authSlice = createSlice({
     
     name: "user",
@@ -88,7 +87,11 @@ const authSlice = createSlice({
             }
             else {
                 state.msg = msg;
+                state.token = token;
                 state.error = null;
+
+                localStorage.setItem('msg', msg)
+                localStorage.setItem('token', token)
             }
         },
         [signUpUser.rejected]: (state, action) => {

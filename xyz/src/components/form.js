@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { UpdateApiAction } from '../redux/action/action';
+import { PostOptionApiAction } from '../redux/action/action';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import getDetailsByHooks from '../hooks/getDetailsByHooks';
 import { Link } from 'react-router-dom';
 
-export const UpdateDetails = () => {
+export const Forms1 = () => {
     const { id } = useParams();
     const [title, setTitle] = useState('');
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-
     const [detailsById] = getDetailsByHooks(id);
     useEffect(() => {
         const data = () => {
@@ -30,22 +30,21 @@ export const UpdateDetails = () => {
         const finalData = {
             title: title,
         };
-        dispatch(UpdateApiAction(finalData, id));
+        dispatch(PostOptionApiAction(finalData, id));
         console.log('****', finalData);
+        navigate('/homes')
     };
 
     return (
-        <div className='container'>
-            <h1>Edit Details</h1>
-            <input defaultValue={title} onChange={(e) => titleHandler(e)} type="text" placeholder='Add Title' className='form-control' /> <br />
-            <Link to=''>
-                <button onClick={(e) => { clickHandler(e) }} className='btn btn-info'>Update Details</button>
-            </Link>
+        <div className='container add'>
+            <h1>Add New Option</h1>
+            <input onChange={(e) => titleHandler(e)} type="text" placeholder='Add Options' className='form-control' /> <br />
+            <button onClick={(e) => { clickHandler(e) }} className='btn btn-info'>Submit</button>
             <Link to='/homes'>
-                <button className='btn btn-outline-info'>Back</button>
+                <button className='btn btn-outline-primary'>Back</button>
             </Link>
         </div>
     )
 }
 
-export default UpdateDetails;
+export default Forms1;

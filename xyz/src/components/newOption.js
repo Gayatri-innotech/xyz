@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { PostApiAction } from '../redux/action/action';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
 
-export const Forms = () => {
+export const NewOption = () => {
 
     const [title, setTitle] = useState('');
     const [option1, setOption1] = useState('');
@@ -11,9 +10,9 @@ export const Forms = () => {
     const [option3, setOption3] = useState('');
     const [option4, setOption4] = useState('');
 
-    const navigate = useNavigate();
+
     const dispatch = useDispatch();
-    // const isResponse = useSelector((state) => state.reducer.isResponse);
+
     const titleHandler = (e) => {
         setTitle(e.target.value)
     }
@@ -40,13 +39,9 @@ export const Forms = () => {
             option4: option4,
         };
         dispatch(PostApiAction(finalData));
-        navigate('/homes')
-        // console.log('****', finalData);
     };
 
-    // if (isResponse) {
-    //     alert('Add New Poll Sucessfully');
-    // }
+
     return (
         <div className='container add'>
             <h1>Add New Poll</h1>
@@ -56,12 +51,8 @@ export const Forms = () => {
             <input onChange={(e) => optionHandler3(e)} className='form-control' placeholder='Add Option 3' type="text" /><br />
             <input onChange={(e) => optionHandler4(e)} className='form-control' placeholder='Add Option 4' type="text" /><br />
             <button onClick={(e) => { clickHandler(e) }} className='btn btn-info'>Submit</button>
-            <Link to='/homes'>
-                <button className='btn btn-outline-primary'>Back</button>
-            </Link>
-
         </div>
     )
 }
 
-export default Forms;
+export default NewOption;
