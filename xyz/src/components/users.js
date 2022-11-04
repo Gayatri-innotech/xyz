@@ -23,7 +23,9 @@ const Users = () => {
     })
     return (
         <div className='container'>
-
+            <Link to='/homes'>
+                <button className='btn btn-outline-primary'>Back</button>
+            </Link>
             <table className="table">
                 <thead className="thead-dark">
                     <tr>
