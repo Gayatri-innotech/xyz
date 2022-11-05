@@ -11,7 +11,7 @@ const Users = () => {
         dispatch(GetApiUserAction());
     }, [dispatch]);
 
-    const result = responseData.map((data, index) => {
+    const result = responseData?.map((data, index) => {
         return (
             <tr key={index}>
                 <th scope="row">{data.password}</th>

@@ -15,6 +15,7 @@ const Register = () => {
   const [err, setErr] = useState('');
 
   const dispatch = useDispatch();
+  const authSign = useSelector(state=>state.authSlice)
   const navigate = useNavigate();
   const registerHandle = () => {
     console.log(name, password, { role })
@@ -25,6 +26,11 @@ const Register = () => {
       navigate('/')
     }
   }
+
+  useEffect (() => {
+    if(authSign?.user)
+    navigate('/')
+  },[authSign])
 
   return (
     <div className='contain'>

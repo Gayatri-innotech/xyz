@@ -34,7 +34,7 @@ const PostApiDetails = (data) => {
     const headers = {
         'Content-Type': 'application/json',
     };
-    return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/add_poll?title=${data['title']}%20Poll&options=${data['option1']}____${data['option2']}____${data['option3']}____${data['option4']}`, 'POST', headers, data);
+    return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/add_poll?title=${data['title']}%20Poll&options=${data['option1']}____${data['option2']}____${data['...option2']}____${data['option4']}`, 'POST', headers, data);
 };
 
 // const payload = {};

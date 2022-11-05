@@ -87,7 +87,6 @@ const authSlice = createSlice({
             }
             else {
                 state.msg = msg;
-                state.token = token;
                 state.error = null;
             }
         },

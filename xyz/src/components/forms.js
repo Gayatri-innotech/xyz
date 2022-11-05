@@ -40,7 +40,7 @@ export const Forms = () => {
         const finalData = {
             title: title,
             option1: option1,
-            option2: [...option2,{input:''}],
+            option2: option2,
 
         };
         dispatch(PostApiAction(finalData));
