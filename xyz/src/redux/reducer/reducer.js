@@ -1,9 +1,10 @@
-import { GET_DETAILS, POST_DETAILS, UPDATE_DETAILS, DELETE_DETAILS, GET_DETAILS_USER } from "../type";
+import { GET_DETAILS, POST_DETAILS, UPDATE_DETAILS, DELETE_DETAILS, GET_DETAILS_USER, DELETE_OPTION_DETAILS } from "../type";
 
 const initialState = {
     details: [],
     detailsById: [],
     userDetails: [],
+    // deleteOption: false,
     // isUpdateResponse: false,
     // isDeleteResponse: false,
     // isResponse: false,
@@ -18,6 +19,10 @@ const Reducer = (state = initialState, action) => {
         case GET_DETAILS_USER:
             return {
                 userDetails: action.payload,
+            };
+        case DELETE_OPTION_DETAILS:
+            return {
+                deleteOption: action.payload,
             };
         // case POST_DETAILS:
         //     return {

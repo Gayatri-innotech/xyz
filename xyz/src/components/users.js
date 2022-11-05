@@ -11,7 +11,7 @@ const Users = () => {
         dispatch(GetApiUserAction());
     }, [dispatch]);
 
-    const result = responseData.map((data, index) => {
+    const result = responseData?.map((data, index) => {
         return (
             <tr key={index}>
                 <th scope="row">{data.password}</th>
@@ -23,7 +23,9 @@ const Users = () => {
     })
     return (
         <div className='container'>
-
+            <Link to='/homes'>
+                <button className='btn btn-outline-primary'>Back</button>
+            </Link>
             <table className="table">
                 <thead className="thead-dark">
                     <tr>
