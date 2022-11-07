@@ -12,6 +12,7 @@ export const Forms1 = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [detailsById] = getDetailsByHooks(id);
+
     useEffect(() => {
         const data = () => {
             if (detailsById.data) {
@@ -38,10 +39,21 @@ export const Forms1 = () => {
     return (
         <div className='container add'>
             <h1>Add New Option</h1>
-            <input onChange={(e) => titleHandler(e)} type="text" placeholder='Add Options' className='form-control' /> <br />
-            <button onClick={(e) => { clickHandler(e) }} className='btn btn-info'>Submit</button>
+
+            <input
+                onChange={(e) => titleHandler(e)}
+                type="text"
+                placeholder='Add Options'
+                className='form-control' /> <br />
+
+            <button
+                onClick={(e) => { clickHandler(e) }}
+                className='btn btn-info'>
+                Submit
+            </button>
             <Link to='/homes'>
-                <button className='btn btn-outline-primary'>Back</button>
+                <button
+                    className='btn btn-outline-primary'>Back</button>
             </Link>
         </div>
     )

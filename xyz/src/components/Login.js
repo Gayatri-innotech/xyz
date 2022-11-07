@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signInUser } from '../redux/reducer/authSlice';
 import { NavLink, useNavigate } from 'react-router-dom'
 import './style.css'
+import { GetApiDetailsUser } from '../api/axiosRequest';
 
 const Login = () => {
   const [username, setUsername] = useState();
@@ -12,6 +13,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const authState = useSelector(state => state.authSlice)
   const navigate = useNavigate();
+
   const handleLogin = () => {
     console.log(username, pass)
     if (username.length === 0 || pass.length === 0) {
@@ -23,7 +25,7 @@ const Login = () => {
   console.log(authState);
 
   useEffect(() => {
-    if (authState?.token) {
+    if (authState?.user) {
       navigate('/homes')
     }
   }, [authState])
@@ -42,9 +44,11 @@ const Login = () => {
         onChange={(e) => setUsername(e.target.value)} /><br />
 
       {error && username.length <= 0 ?
-        <label className='error'>Username can't be empty!</label> : ''}<br /><br />
+        <label
+          className='error'>Username can't be empty!</label> : ''}<br /><br />
 
-      <label htmlFor='' className='boxe'>Password</label><br />
+      <label
+        htmlFor='' className='boxe'>Password</label><br />
       <input
         type='password'
         className='boxes'
@@ -53,9 +57,20 @@ const Login = () => {
         onChange={(e) => setPass(e.target.value)} /><br />
 
       {error && pass.length <= 0 ?
-        <label className='error'>Password can't be empty!</label> : ''}<br /><br />
-      <button type='submit' className='btn1' onClick={handleLogin}>Login</button>
-      <p className='boxx'>Do not have an account?</p>
+        <label
+          className='error'>
+          Password can't be empty!
+        </label> : ''}<br /><br />
+
+      <button
+        type='submit'
+        className='btn1'
+        onClick={handleLogin}>Login</button>
+
+      <p
+        className='boxx'>
+        Do not have an account?
+      </p>
       <NavLink to='/reg' className='btns'>Sign Up</NavLink>
     </div>
   )

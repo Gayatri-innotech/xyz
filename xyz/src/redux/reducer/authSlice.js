@@ -2,10 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
     msg: "",
-    user: "",
-    token: "",
+    user: null,
     loading: "",
-    error: "" 
+    error: ""
 }
 
 export const signUpUser = createAsyncThunk('signupuser', async (body) => {
@@ -19,18 +18,23 @@ export const signUpUser = createAsyncThunk('signupuser', async (body) => {
     return await res.json();
 })
 export const signInUser = createAsyncThunk('signinuser', async (body) => {
-    const res = await fetch(`https://secure-refuge-14993.herokuapp.com/login?username=${body.username}&password=${body.pass}`, {
-        method: "post",
+    const res = await fetch(`https://secure-refuge-14993.herokuapp.com/list_users`, {
+        method: "GET",
         headers: {
             'Content-Type': "application/json",
         },
-        // body: JSON.stringify(body)
     })
-    return await res.json();
+    const jsonRes = await res.json();
+    const loggedIn = jsonRes.data.find(user => user.username === body.username && user.password === body.pass);
+
+    if (loggedIn)
+        return { user: loggedIn };
+
+    return { error: "Invalid credentials" }
 })
 
 const authSlice = createSlice({
-    
+
     name: "user",
     initialState,
     reducers: {
@@ -44,7 +48,7 @@ const authSlice = createSlice({
         },
 
         logout: (state, action) => {
-            state.token = null;
+            state.user = null;
             localStorage.clear();
         }
 
@@ -54,21 +58,18 @@ const authSlice = createSlice({
             state.loading = true;
         },
         // register user
-        [signInUser.fulfilled]: (state, { payload: { error, msg, token, user, data } }) => {
-            console.log(error, msg, token, user, data);
+        [signInUser.fulfilled]: (state, { payload: { error, user } }) => {
+            console.log(error, user);
+
             state.loading = false;
             if (error) {
-                state.error = data;
+                state.error = error;
             }
             else {
-                state.msg = msg;
-                state.token = token;
                 state.user = user;
                 state.error = null;
 
-                localStorage.setItem('msg', msg)
                 localStorage.setItem('user', JSON.stringify(user))
-                localStorage.setItem('token', token)
             }
         },// reg success
         [signInUser.rejected]: (state, action) => {

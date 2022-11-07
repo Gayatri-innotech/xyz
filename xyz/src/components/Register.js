@@ -15,7 +15,7 @@ const Register = () => {
   const [err, setErr] = useState('');
 
   const dispatch = useDispatch();
-  const authSign = useSelector(state=>state.authSlice)
+  const authSign = useSelector(state => state.authSlice)
   const navigate = useNavigate();
   const registerHandle = () => {
     console.log(name, password, { role })
@@ -27,38 +27,38 @@ const Register = () => {
     }
   }
 
-  useEffect (() => {
-    if(authSign?.user)
-    navigate('/')
-  },[authSign])
+  useEffect(() => {
+    if (authSign?.user)
+      navigate('/')
+  }, [authSign])
 
   return (
     <div className='contain'>
       <h2 className='sub'>Register</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor=''
-        className='boxe'>Username</label><br />
-      <input
-        type='text'
-        className='boxes'
-        placeholder='Username'
-        value={name}
-        onChange={(e) => setName(e.target.value)} /><br />
+        <label htmlFor=''
+          className='boxe'>Username</label><br />
+        <input
+          type='text'
+          className='boxes'
+          placeholder='Username'
+          value={name}
+          onChange={(e) => setName(e.target.value)} /><br />
 
-      {err && name.length <= 0 ?
-        <label className='error'>Username can't be empty!</label> : ''}<br /><br />
+        {err && name.length <= 0 ?
+          <label className='error'>Username can't be empty!</label> : ''}<br /><br />
 
-      <label htmlFor='' className='boxe'>Password</label><br />
-      <input
-        type='password'
-        className='boxes'
-        placeholder='Password'
-        value={password}
-        onChange={(e) => setPassword(e.target.value)} /><br />
+        <label htmlFor='' className='boxe'>Password</label><br />
+        <input
+          type='password'
+          className='boxes'
+          placeholder='Password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} /><br />
 
-      {err && password.length <= 0 ? <label className='error'>Password can't be empty!</label> : ''} <br /><br />
+        {err && password.length <= 0 ? <label className='error'>Password can't be empty!</label> : ''} <br /><br />
 
-      
+
         <label htmlFor='' className='boxe'>User</label>
         <input
           type='radio'
@@ -74,16 +74,16 @@ const Register = () => {
           name='role'
           value='admin'
           {...register('userType', { required: 'User Type is Required' })}
-          onChange={(e) => setRole(e.target.value)} /><br/>
-          {errors.userType && <span>{errors.userType.message}</span>}<br/><br/>
-          <button onClick={registerHandle} className='btn1'>Register</button><br/>
-          <NavLink className='btns' to='/'>Go Back</NavLink>
+          onChange={(e) => setRole(e.target.value)} /><br />
+        {errors.userType && <span>{errors.userType.message}</span>}<br /><br />
+        <button onClick={registerHandle} className='btn1'>Register</button><br />
+        <NavLink className='btns' to='/'>Go Back</NavLink>
 
       </form>
-        <div>
-        
-        </div>
-      
+      <div>
+
+      </div>
+
     </div>
   )
 }

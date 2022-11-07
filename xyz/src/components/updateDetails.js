@@ -37,11 +37,19 @@ export const UpdateDetails = () => {
     return (
         <div className='container'>
             <h1>Edit Details</h1>
-            <input defaultValue={title} onChange={(e) => titleHandler(e)} type="text" placeholder='Add Title' className='form-control' /> <br />
-            
-                <button onClick={(e) => { clickHandler(e) }} className='btn btn-info'>Update Details</button>
+            <input
+                defaultValue={title}
+                onChange={(e) => titleHandler(e)}
+                type="text"
+                placeholder='Add Title'
+                className='form-control' /> <br />
+
+            <button
+                onClick={(e) => { clickHandler(e) }}
+                className='btn btn-info'>Update Details</button>
             <Link to='/homes'>
-                <button className='btn btn-outline-info'>Back</button>
+                <button
+                    className='btn btn-outline-info'>Back</button>
             </Link>
         </div>
     )

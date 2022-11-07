@@ -2,10 +2,6 @@ import {
     GetApiDetails, PostApiDetails, UpdateApiDetails, DeleteApiDetails, GetApiDetailsUser,
     DeleteOptionApiDetails, PostOptionApiDetails, PostVoteApiDetails
 } from "../../api/axiosRequest";
-import {
-    GET_DETAILS, POST_DETAILS, UPDATE_DETAILS, DELETE_DETAILS, GET_DETAILS_USER,
-    DELETE_OPTION_DETAILS, POST_OPTION_DETAILS, POST_VOTE_DETAILS
-} from "../type";
 
 const GetApiAction = () => {
     return function (dispatch) {
@@ -33,10 +29,6 @@ const GetApiUserAction = () => {
 
 const PostApiAction = (request) => {
     return function (dispatch) {
-        // dispatch({
-        //     type: 'POST_DETAILS',
-        //     payload: false,
-        // });
         return PostApiDetails(request).then((res) => {
             console.log('PostApiAction Response', res);
             dispatch({
@@ -50,10 +42,6 @@ const PostApiAction = (request) => {
 const PostVoteApiAction = (request) => {
     console.log('REQ', request);
     return function (dispatch) {
-        // dispatch({
-        //     type: 'POST_VOTE_DETAILS',
-        //     payload: false,
-        // });
         return PostVoteApiDetails(request).then((res) => {
             console.log('PostVoteApiDetails Response', res);
             dispatch({
@@ -66,10 +54,6 @@ const PostVoteApiAction = (request) => {
 
 const UpdateApiAction = (request, id) => {
     return function (dispatch) {
-        // dispatch({
-        //     type: 'UPDATE_DETAILS',
-        //     payload: false,
-        // })
         return UpdateApiDetails(request, id).then((res) => {
             console.log('UpdateApiAction Response', res);
             dispatch({
@@ -82,42 +66,32 @@ const UpdateApiAction = (request, id) => {
 
 const DeleteApiAction = (id) => {
     return function (dispatch) {
-        // dispatch({
-        //     type: 'DELETE_DETAILS',
-        //     payload: false,
-        // })
         return DeleteApiDetails(id).then((res) => {
             console.log('DeleteApiAction Response', res);
             dispatch({
                 type: 'DELETE_DETAILS',
                 payload: true,
             })
+            dispatch(GetApiAction())
         })
     };
 };
 
 const DeleteOptionApiAction = (request) => {
     return function (dispatch) {
-        // dispatch({
-        //     type: 'DELETE_OPTION_DETAILS',
-        //     payload: false,
-        // })
         return DeleteOptionApiDetails(request).then((res) => {
             console.log('DeleteOptionApiAction Response', res);
             dispatch({
                 type: 'DELETE_OPTION_DETAILS',
-                payload: true,
-            })
+                payload: request,
+            });
+            dispatch(GetApiAction())
         })
     };
 };
 
 const PostOptionApiAction = (request, id) => {
     return function (dispatch) {
-        // dispatch({
-        //     type: 'POST_OPTION_DETAILS',
-        //     payload: false,
-        // });
         return PostOptionApiDetails(request, id).then((res) => {
             console.log('PostOptionApiAction Response', res);
             dispatch({

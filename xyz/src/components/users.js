@@ -14,9 +14,7 @@ const Users = () => {
     const result = responseData?.map((data, index) => {
         return (
             <tr key={index}>
-                <th scope="row">{data.password}</th>
-                <td>{data.role}</td>
-                <td>@{data.username}</td>
+                <td>{data.username}</td>
             </tr>
 
         )
@@ -29,9 +27,7 @@ const Users = () => {
             <table className="table">
                 <thead className="thead-dark">
                     <tr>
-                        <th scope="col">PASSWORD</th>
-                        <th scope="col">ROLE</th>
-                        <th scope="col">USER_NAME</th>
+                        <th scope="col">List Of Users</th>
                     </tr>
                 </thead>
                 <tbody>
