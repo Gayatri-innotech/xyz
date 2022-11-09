@@ -7,9 +7,11 @@ import Modal from 'react-bootstrap/Modal';
 import { logout } from '../redux/reducer/authSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import Edit from './Edit';
 
 const AdminHome = () => {
     const [show, setShow] = useState(false);
+    const [shows, setShows] = useState(false);
     const [visible, setVisible] = useState({});
 
     const handleClose = () => {
@@ -17,6 +19,11 @@ const AdminHome = () => {
         dispatch(GetApiAction())
     }
     const handleShow = () => setShow(true);
+
+    const handleCloses = () => {
+        setShows(false);
+    }
+    const handleShows = () => setShows(true);
 
     const navigate = useNavigate();
     const user = useSelector(state => state.authSlice.user)
@@ -45,9 +52,7 @@ const AdminHome = () => {
                         {data['title']}&nbsp;
                         <span>
                             {user?.role === 'admin' &&
-                                <Link to={`/edit/${data._id}`}>
-                                    <FontAwesomeIcon icon={faPen} />
-                                </Link>}
+                                <Edit/>}
                         </span>
 
                         <span>
@@ -106,9 +111,36 @@ const AdminHome = () => {
                                         <button
                                             className="remove"
                                             value={item.option}
-                                            onClick={() => dispatch(DeleteOptionApiAction({ pollid: data._id, option: item.option }))}>X
+                                            onClick={handleShows}>
+                                            X
                                         </button>}
 
+
+                                    <Modal
+                                        show={shows}
+                                        onHide={handleCloses}
+                                        backdrop="static"
+                                        keyboard={false}
+                                    >
+                                        <Modal.Header closeButton>
+                                            <Modal.Title>Delete Option</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            Are you sure you want to delete this option?
+                                            Once you click on Confirm Delete, you cannot Undo it!
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button
+                                                variant="secondary"
+                                                onClick={handleCloses}>
+                                                Close
+                                            </Button>
+                                            <Button
+                                                onClick={() =>
+                                                    dispatch(DeleteOptionApiAction({ pollid: data._id, option: item.option }))}
+                                                variant="primary">Confirm Delete</Button>
+                                        </Modal.Footer>
+                                    </Modal>
 
                                 </span> &nbsp;
                             </h6>

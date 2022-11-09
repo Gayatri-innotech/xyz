@@ -84,7 +84,7 @@ const DeleteOptionApiAction = (request) => {
             dispatch({
                 type: 'DELETE_OPTION_DETAILS',
                 payload: request,
-            });
+            })
             dispatch(GetApiAction())
         })
     };

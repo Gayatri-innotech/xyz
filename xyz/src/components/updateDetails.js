@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { UpdateApiAction } from '../redux/action/action';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import getDetailsByHooks from '../hooks/getDetailsByHooks';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 export const UpdateDetails = () => {
     const { id } = useParams();
     const [title, setTitle] = useState('');
+    const [show, setShow] = useState('');
+    const [wrong, setWrong] = useState('');
 
+    const handleShow = () => setShow(true);
+    const handleClose = () => {
+        setShow(false);
+    }
+
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const [detailsById] = getDetailsByHooks(id);
@@ -26,12 +36,17 @@ export const UpdateDetails = () => {
     }
 
     const clickHandler = (e) => {
-        e.preventDefault();
-        const finalData = {
-            title: title,
-        };
-        dispatch(UpdateApiAction(finalData, id));
-        console.log('****', finalData);
+        if (title?.length === 0) {
+            setWrong(true)
+        } else {
+            e.preventDefault();
+            const finalData = {
+                title: title,
+            };
+            dispatch(UpdateApiAction(finalData, id));
+            console.log('****', finalData);
+            navigate('/homes')
+        }
     };
 
     return (
@@ -45,8 +60,39 @@ export const UpdateDetails = () => {
                 className='form-control' /> <br />
 
             <button
-                onClick={(e) => { clickHandler(e) }}
-                className='btn btn-info'>Update Details</button>
+                onClick={handleShow}
+                className='btn btn-info'>Update Title</button>
+
+            {wrong && title.length <= 0 ?
+                <label
+                    className='errors'>Title can't be empty!</label> : ''}
+
+            <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm to Update Title</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to Edit this?
+                    Once you click on update, the new title will be updated!
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant="secondary"
+                        onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button
+                        onClick={(e) => { clickHandler(e) }}
+                        variant="primary">Update</Button>
+                </Modal.Footer>
+            </Modal>
+
+
             <Link to='/homes'>
                 <button
                     className='btn btn-outline-info'>Back</button>
