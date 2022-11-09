@@ -96,7 +96,6 @@ export const Forms = () => {
                 <label
                     className='error'>Title can't be empty!</label> : ''}<br /><br />
 
-
             {
                 options.map((option, i) => <div key={option.id}>
                     <input placeholder='Enter option value' value={option.value} onChange={(e) => onChange(i, e)} />

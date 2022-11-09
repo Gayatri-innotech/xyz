@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { signInUser } from '../redux/reducer/authSlice';
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, Navigate } from 'react-router-dom'
 import './style.css'
-import { GetApiDetailsUser } from '../api/axiosRequest';
 
 const Login = () => {
   const [username, setUsername] = useState();
@@ -16,22 +15,22 @@ const Login = () => {
 
   const handleLogin = () => {
     console.log(username, pass)
-    if (username.length === 0 || pass.length === 0) {
+    if (username?.length === 0 || pass?.length === 0) {
       setError(true)
     } else {
       dispatch(signInUser({ username, pass }))
     }
   }
-  console.log(authState);
 
   useEffect(() => {
-    if (authState?.user) {
+    if (authState?.token) {
       navigate('/homes')
     }
   }, [authState])
 
-  return (
-    <div className='contain'>
+
+  return <>{
+    authState?.user ? <Navigate to="/homes" /> : <div className='contain'>
       <h2 className='sub'>Login</h2>
       {authState.error}<br />
 
@@ -73,7 +72,8 @@ const Login = () => {
       </p>
       <NavLink to='/reg' className='btns'>Sign Up</NavLink>
     </div>
-  )
+  }
+  </>
 }
 
 export default Login

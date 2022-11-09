@@ -1,17 +1,17 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-    msg: "",
-    user: null,
-    loading: "",
-    error: ""
+    msg: '',
+    user: localStorage.getItem('user'),
+    loading: '',
+    error: ''
 }
 
 export const signUpUser = createAsyncThunk('signupuser', async (body) => {
     const res = await fetch(`https://secure-refuge-14993.herokuapp.com/add_user?username=${body.name}&password=${body.password}&role=${body.role}`, {
-        method: "post",
+        method: 'post',
         headers: {
-            'Content-Type': "application/json",
+            'Content-Type': 'application/json',
         },
         // body: JSON.stringify(body)
     })
@@ -19,9 +19,9 @@ export const signUpUser = createAsyncThunk('signupuser', async (body) => {
 })
 export const signInUser = createAsyncThunk('signinuser', async (body) => {
     const res = await fetch(`https://secure-refuge-14993.herokuapp.com/list_users`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-            'Content-Type': "application/json",
+            'Content-Type': 'application/json',
         },
     })
     const jsonRes = await res.json();
@@ -30,21 +30,21 @@ export const signInUser = createAsyncThunk('signinuser', async (body) => {
     if (loggedIn)
         return { user: loggedIn };
 
-    return { error: "Invalid credentials" }
+    return { error: 'Invalid credentials' }
 })
 
 const authSlice = createSlice({
 
-    name: "user",
+    name: 'user',
     initialState,
     reducers: {
 
         addToken: (state, action) => {
-            state.token = localStorage.getItem("token")
+            state.token = localStorage.getItem('token')
         },
 
         addUser: (state, action) => {
-            state.token = localStorage.getItem("user")
+            state.token = localStorage.getItem('user')
         },
 
         logout: (state, action) => {

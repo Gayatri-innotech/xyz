@@ -4,17 +4,11 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const Edit = () => {
-    const responseData = useSelector((state) => state.reducer.details);
-    const result = responseData ? responseData.map((data, index) => {
+const Edit = ({ id }) => {
     return (
-        <Link to={`/edit/${data._id}`}>
+        <Link to={`/edit/${id}`}>
             <FontAwesomeIcon icon={faPen} />
         </Link>
-    )
-    }):null
-    return(
-        <h1>{result}</h1>
     )
 }
 

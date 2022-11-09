@@ -27,12 +27,12 @@ const PostApiDetails = (data) => {
     const headers = {
         'Content-Type': 'application/json',
     };
-    return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/add_poll?title=${data['title']}&options=${data['options'].map(o => o.option).join("__")}`, 'POST', headers, data);
+    return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/add_poll?title=${data['title']}&options=${data['options'].map(o => o.option).join("____")}`, 'POST', headers, data);
 };
 
 const PostVoteApiDetails = (payload) => {
     const headers = {
-        'access_token': localStorage.getItem("token"),
+        'access_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWEwMTgyYzU5NTI3ZmUwMDEyMzcwN2IyIiwiaWF0IjoxNTEwMDQ4NDY4LCJleHAiOjE1MTM2NDg0Njh9.DG93Hq-Fde9kNZbgnr34l2dZyeEYyJ0OfD_9yZK1JCQ',
         'Content-Type': 'application/json',
     };
     return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/do_vote?option_text=${payload.option}&id=` + payload.id, 'POST', headers, payload);

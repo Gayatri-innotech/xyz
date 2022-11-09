@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Store from './redux/store';
 import { Provider, useDispatch } from 'react-redux';
@@ -10,7 +10,6 @@ import Users from './components/users';
 import Login from './components/Login';
 import Register from './components/Register';
 import Form from './components/form';
-import NewOption from './components/newOption';
 
 function App() {
 
@@ -21,7 +20,6 @@ function App() {
           <Routes>
             <Route path='/' element={<Login />} />
             <Route path='/reg' element={<Register />} />
-            <Route path='/new' element={<NewOption />} />
             <Route path='/homes' element={<AdminHome />} />
             <Route path='/form' element={<Forms />} />
             <Route path='/forms/:id' element={<Form />} />
