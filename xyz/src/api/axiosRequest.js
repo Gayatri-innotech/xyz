@@ -1,20 +1,14 @@
 import axios from "axios";
+import store from "../redux/store";
 
 export async function AxiosRequest(url, method, headers, params) {
-    return params
-        ? axios({
-            url: url,
-            method: method,
-            headers: headers,
-            data: params,
-        })
-        : axios({
-            url,
-            method: method,
-            headers: headers,
-            data: {},
-        })
-}
+    return axios({
+        url: url,
+        method: method,
+        headers: headers,
+        data: params ?? {},
+    })
+};
 
 const GetApiDetails = () => {
     const headers = {
@@ -34,7 +28,15 @@ const PostApiDetails = (data) => {
     const headers = {
         'Content-Type': 'application/json',
     };
-    return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/add_poll?title=${data['title']}%20Poll&options=${data['option1']}____${data['option2']}____${data['option3']}____${data['option4']}`, 'POST', headers, data);
+    return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/add_poll?title=${data['title']}&options=${data['options'].map(o => o.option).join("____")}`, 'POST', headers, data);
+};
+
+const PostVoteApiDetails = (payload) => {
+    const headers = {
+        'access_token': store.getState().authSlice.user.token,
+        'Content-Type': 'application/json',
+    };
+    return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/do_vote?option_text=${payload.option}&id=` + payload.id, 'POST', headers, payload);
 };
 
 const GetDetailsById = (id) => {
@@ -58,4 +60,20 @@ const DeleteApiDetails = (id) => {
     return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/delete_poll?id=` + id, 'DELETE', headers, {});
 };
 
-export { GetApiDetails, PostApiDetails, GetDetailsById, UpdateApiDetails, DeleteApiDetails, GetApiDetailsUser };
+const DeleteOptionApiDetails = (payload) => {
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+    return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/delete_poll_option?option_text=${payload.option}&id=` + payload.pollid, 'DELETE', headers, payload);
+};
+
+const PostOptionApiDetails = (data, id) => {
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+    return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/add_new_option?option_text=${data['title']}&id=` + id, 'POST', headers, data);
+};
+
+
+
+export { GetApiDetails, PostApiDetails, GetDetailsById, UpdateApiDetails, DeleteApiDetails, GetApiDetailsUser, DeleteOptionApiDetails, PostOptionApiDetails, PostVoteApiDetails };
