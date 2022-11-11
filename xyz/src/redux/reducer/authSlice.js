@@ -16,7 +16,13 @@ export const signUpUser = createAsyncThunk('signupuser', async (body) => {
         // body: JSON.stringify(body)
     })
     return await res.json();
-})
+});
+
+export const getToken = async ({ username, password }) => {
+    const res = await fetch(`https://secure-refuge-14993.herokuapp.com/login?username=${username}&password=${password}`);
+    return await res.json();
+}
+
 export const signInUser = createAsyncThunk('signinuser', async (body) => {
     const res = await fetch(`https://secure-refuge-14993.herokuapp.com/list_users`, {
         method: 'GET',
@@ -27,11 +33,14 @@ export const signInUser = createAsyncThunk('signinuser', async (body) => {
     const jsonRes = await res.json();
     const loggedIn = jsonRes.data.find(user => user.username === body.username && user.password === body.pass);
 
-    if (loggedIn)
+    if (loggedIn) {
+        const {token} = await getToken({username: body.username, password: body.pass});
+        loggedIn.token = token;
         return { user: loggedIn };
+    }
 
-    return { error: 'Invalid credentials' }
-})
+    return { error: 'User does not exist' }
+});
 
 const authSlice = createSlice({
 
@@ -59,8 +68,6 @@ const authSlice = createSlice({
         },
         // register user
         [signInUser.fulfilled]: (state, { payload: { error, user } }) => {
-            console.log(error, user);
-
             state.loading = false;
             if (error) {
                 state.error = error;
@@ -69,9 +76,9 @@ const authSlice = createSlice({
                 state.user = user;
                 state.error = null;
 
-                localStorage.setItem('user', JSON.stringify(user))
+                localStorage.setItem('user', JSON.stringify(user));
             }
-        },// reg success
+        },// reg success\
         [signInUser.rejected]: (state, action) => {
             state.loading = false
         },

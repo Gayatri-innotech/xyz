@@ -1,43 +1,75 @@
+*{
+  background: #20b2aa;
+}
+
 .btn{
   margin-right: 5px;
 }
+
+.icon{
+  border: none;
+  margin: 15px;
+  border-radius: 5px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.btnns{
+  border: none;
+  font-size: 17px;
+}
+
+.btnns:hover {
+  color: #660000;
+}
+
 .card{
   margin: 5px;
   width: 300px;
 }
+
 h1{
   display: flex;
   flex-wrap: wrap;
 }
+
 .add{
   margin-top: 10px;
 }
+
 table{
   width: 100px;
 }
+
 .remove{
   color: black;
   font-size: 12px;
+  font-weight: 900;
   position: absolute;
   right: 0;
   margin: 5px;
   padding: 2px;
   border: none;
 }
+
 .del {
   float: right;
 }
+
 .inp {
   width: 100%;
-  border: 1px solid lightgray;
-  border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid black;
   height: 40px;
-  margin-top: 25px;
+}
+
+.inp::placeholder {
+  color: gray;
 }
 
 .error {
   color:#660000;
-  width: 20%;
+  width: 100%;
   height: 30px;
   margin-top: 10px;
   padding: 3px;
@@ -52,10 +84,83 @@ table{
   height: 40px;
 }
 
-.icon {
+.cross {
+  cursor: pointer;
+  float: right;
+}
+
+.trash{
+  cursor: pointer;
+  background: white;
+}
+
+.like {
+  float: right;
+  margin-right: 5px;
+  color: darkgoldenrod;
   cursor: pointer;
 }
 
-.cross {
-  cursor: pointer;
+.sub {
+  background: white;
+  margin-top: 20px;
+}
+
+.boxx {
+  background: white;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 200;
+  font-size: large;
+}
+
+.contain {
+  border: 1px solid white;
+  background: white;
+  margin: 50px;
+  border-radius: 15px;
+  padding-bottom: 40px;
+  height: 100%;
+}
+
+.boxe {
+  background: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.boxes {
+  width: 30%;
+  height: 25px;
+  border: none;
+  background-color: white;
+  border-bottom: 1px solid black;
+  margin-top: 8px;
+}
+
+.btn1 {
+  width: 20%;
+  height: 25px;
+  border: none;
+  background-color: cadetblue;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.btns {
+  background-color: white;
+  color: #2F4F4F;
+}
+
+.card {
+  width: 200px;
+  float: right;
+  margin: 5px;
+}
+
+.btn {
+  float: right;
+  margin: 5px;
+}
+
+.pen {
+  background: white;
 }

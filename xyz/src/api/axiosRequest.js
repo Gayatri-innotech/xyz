@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "../redux/store";
 
 export async function AxiosRequest(url, method, headers, params) {
     return axios({
@@ -7,7 +8,7 @@ export async function AxiosRequest(url, method, headers, params) {
         headers: headers,
         data: params ?? {},
     })
-}
+};
 
 const GetApiDetails = () => {
     const headers = {
@@ -32,7 +33,7 @@ const PostApiDetails = (data) => {
 
 const PostVoteApiDetails = (payload) => {
     const headers = {
-        'access_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWEwMTgyYzU5NTI3ZmUwMDEyMzcwN2IyIiwiaWF0IjoxNTEwMDQ4NDY4LCJleHAiOjE1MTM2NDg0Njh9.DG93Hq-Fde9kNZbgnr34l2dZyeEYyJ0OfD_9yZK1JCQ',
+        'access_token': store.getState().authSlice.user.token,
         'Content-Type': 'application/json',
     };
     return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/do_vote?option_text=${payload.option}&id=` + payload.id, 'POST', headers, payload);
@@ -72,5 +73,7 @@ const PostOptionApiDetails = (data, id) => {
     };
     return AxiosRequest(`https://secure-refuge-14993.herokuapp.com/add_new_option?option_text=${data['title']}&id=` + id, 'POST', headers, data);
 };
+
+
 
 export { GetApiDetails, PostApiDetails, GetDetailsById, UpdateApiDetails, DeleteApiDetails, GetApiDetailsUser, DeleteOptionApiDetails, PostOptionApiDetails, PostVoteApiDetails };

@@ -1,27 +1,26 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import { PostApiAction } from '../redux/action/action';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export const Forms = () => {
 
     const [title, setTitle] = useState('');
-
     const [errors, setErrors] = useState('');
     const [show, setShow] = useState('');
-
-
     const [options, setOptions] = useState([{
+
         id: 1,
         value: ""
     }, {
         id: 2,
         value: ""
     }]);
+
     const nextId = useRef(3);
 
 
@@ -43,29 +42,12 @@ export const Forms = () => {
         })
     }
 
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const titleHandler = (e) => {
         setTitle(e.target.value)
     }
 
-    // const handleClick=() => {
-    //     setOption2([...option2],{});
-    // }
-
-    // const optionHandler1 = (e) => {
-    //     setOption1(e.target.value)
-    // }
-    // const optionHandler2 = (e) => {
-    //     setOption2(e.target.value)
-    // }
-    // const optionHandler3 = (e) => {
-    //     setOption3(e.target.value)
-    // }
-    // const optionHandler4 = (e) => {
-    //     setOption4(e.target.value)
-    // }
     const handleShow = () => setShow(true);
     const handleClose = () => {
         setShow(false);
@@ -85,30 +67,62 @@ export const Forms = () => {
             dispatch(PostApiAction(finalData));
             navigate('/homes')
         }
-        // console.log('****', finalData);
     };
 
     return (
         <div className='container add'>
             <h1>Add New Poll</h1>
-            <input onChange={(e) => titleHandler(e)} type="text" placeholder='Add Title' className='form-control' />
+            <input
+                onChange={(e) => titleHandler(e)}
+                type="text"
+                placeholder='Add Title'
+                className='form-control'
+            />
+
             {errors && title.length <= 0 ?
                 <label
-                    className='error'>Title can't be empty!</label> : ''}<br /><br />
-
+                    className='error'>
+                    Title can't be empty!
+                </label> : ''}
+            <br /><br />
             {
                 options.map((option, i) => <div key={option.id}>
-                    <input placeholder='Enter option value' value={option.value} onChange={(e) => onChange(i, e)} />
-                    <button type='button' onClick={() => removeOption(i)}>&times;</button>
-                </div>)
+                    <input
+                        className='inp'
+                        placeholder='Enter option value'
+                        value={option.value}
+                        onChange={(e) => onChange(i, e)}
+                    />
+
+                    <FontAwesomeIcon
+                        className='cross'
+                        onClick={() => removeOption(i)}
+                        icon={faXmark}
+                    />
+                </div>
+                )
             }
 
-            <button type='button' onClick={addOption}>Add Option</button>
+            {
+                errors && options.length <= 0 ?
+                    <label
+                        className='error'>
+                        Options can't be empty! Choose atleast 2 Options to Create the Poll.
+                    </label> : ''
+            }
 
+            <button
+                className='icon'
+                onClick={addOption}>
+                +Add Options
+            </button>
             <br />
 
-            <button onClick={handleShow} className='btn btn-info'>Submit</button>
-
+            <button
+                onClick={handleShow}
+                className='btn btn-info'>
+                Submit
+            </button>
 
             <Modal
                 show={show}
@@ -135,7 +149,7 @@ export const Forms = () => {
                 </Modal.Footer>
             </Modal>
             <Link to='/homes'>
-                <button className='btn btn-outline-primary'>Back</button>
+                <button className='btn btn-primary'>Back</button>
             </Link>
         </div>
     )

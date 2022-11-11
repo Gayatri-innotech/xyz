@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { UpdateApiAction } from '../redux/action/action';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import getDetailsByHooks from '../hooks/getDetailsByHooks';
 import { Link } from 'react-router-dom';
@@ -50,22 +50,34 @@ export const UpdateDetails = () => {
     };
 
     return (
-        <div className='container'>
-            <h1>Edit Details</h1>
+        <div
+            className='container'>
+            <h1>
+                Edit Details
+            </h1>
+
             <input
                 defaultValue={title}
                 onChange={(e) => titleHandler(e)}
                 type="text"
                 placeholder='Add Title'
-                className='form-control' /> <br />
+                className='form-control'
+            />
+            <br />
 
             <button
                 onClick={handleShow}
-                className='btn btn-info'>Update Title</button>
+                className='btn btn-info'>
+                Update Title
+            </button>
 
-            {wrong && title.length <= 0 ?
-                <label
-                    className='errors'>Title can't be empty!</label> : ''}
+            {
+                wrong && title.length <= 0 ?
+                    <label
+                        className='errors'>
+                        Title can't be empty!
+                    </label> : ''
+            }
 
             <Modal
                 show={show}
@@ -74,7 +86,9 @@ export const UpdateDetails = () => {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Confirm to Update Title</Modal.Title>
+                    <Modal.Title>
+                        Confirm to Update Title
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     Are you sure you want to Edit this?
@@ -88,14 +102,18 @@ export const UpdateDetails = () => {
                     </Button>
                     <Button
                         onClick={(e) => { clickHandler(e) }}
-                        variant="primary">Update</Button>
+                        variant="primary">
+                        Update
+                    </Button>
                 </Modal.Footer>
             </Modal>
 
 
             <Link to='/homes'>
                 <button
-                    className='btn btn-outline-info'>Back</button>
+                    className='btn btn-outline-info'>
+                    Back
+                </button>
             </Link>
         </div>
     )

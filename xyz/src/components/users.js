@@ -19,15 +19,28 @@ const Users = () => {
 
         )
     })
+
     return (
-        <div className='container'>
-            <Link to='/homes'>
-                <button className='btn btn-outline-primary'>Back</button>
+        <div
+            className='container'>
+
+            <Link
+                to='/homes'>
+                <button
+                    className='btn btn-outline-primary'>
+                    Back
+                </button>
+
             </Link>
-            <table className="table">
-                <thead className="thead-dark">
+            <table
+                className="table">
+                <thead
+                    className="thead-dark">
                     <tr>
-                        <th scope="col">List Of Users</th>
+                        <th
+                            scope="col">
+                            List Of Users
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
