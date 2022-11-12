@@ -1,51 +1,63 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-    msg: "",
-    user: "",
-    token: "",
-    loading: "",
-    error: "" 
+    msg: '',
+    user: localStorage.getItem('user'),
+    loading: '',
+    error: ''
 }
 
 export const signUpUser = createAsyncThunk('signupuser', async (body) => {
     const res = await fetch(`https://secure-refuge-14993.herokuapp.com/add_user?username=${body.name}&password=${body.password}&role=${body.role}`, {
-        method: "post",
+        method: 'post',
         headers: {
-            'Content-Type': "application/json",
+            'Content-Type': 'application/json',
         },
         // body: JSON.stringify(body)
     })
     return await res.json();
-})
-export const signInUser = createAsyncThunk('signinuser', async (body) => {
-    const res = await fetch(`https://secure-refuge-14993.herokuapp.com/login?username=${body.username}&password=${body.pass}`, {
-        method: "post",
-        headers: {
-            'Content-Type': "application/json",
-        },
-        // body: JSON.stringify(body)
-    })
-    return await res.json();
-})
+});
 
+export const getToken = async ({ username, password }) => {
+    const res = await fetch(`https://secure-refuge-14993.herokuapp.com/login?username=${username}&password=${password}`);
+    return await res.json();
+}
+
+export const signInUser = createAsyncThunk('signinuser', async (body) => {
+    const res = await fetch(`https://secure-refuge-14993.herokuapp.com/list_users`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    const jsonRes = await res.json();
+    const loggedIn = jsonRes.data.find(user => user.username === body.username && user.password === body.pass);
+
+    if (loggedIn) {
+        const {token} = await getToken({username: body.username, password: body.pass});
+        loggedIn.token = token;
+        return { user: loggedIn };
+    }
+
+    return { error: 'User does not exist' }
+});
 
 const authSlice = createSlice({
-    
-    name: "user",
+
+    name: 'user',
     initialState,
     reducers: {
 
         addToken: (state, action) => {
-            state.token = localStorage.getItem("token")
+            state.token = localStorage.getItem('token')
         },
 
         addUser: (state, action) => {
-            state.token = localStorage.getItem("user")
+            state.token = localStorage.getItem('user')
         },
 
         logout: (state, action) => {
-            state.token = null;
+            state.user = null;
             localStorage.clear();
         }
 
@@ -55,23 +67,18 @@ const authSlice = createSlice({
             state.loading = true;
         },
         // register user
-        [signInUser.fulfilled]: (state, { payload: { error, msg, token, user, data } }) => {
-            console.log(error, msg, token, user, data);
+        [signInUser.fulfilled]: (state, { payload: { error, user } }) => {
             state.loading = false;
             if (error) {
-                state.error = data;
+                state.error = error;
             }
             else {
-                state.msg = msg;
-                state.token = token;
                 state.user = user;
                 state.error = null;
 
-                localStorage.setItem('msg', msg)
-                localStorage.setItem('user', JSON.stringify(user))
-                localStorage.setItem('token', token)
+                localStorage.setItem('user', JSON.stringify(user));
             }
-        },// reg success
+        },// reg success\
         [signInUser.rejected]: (state, action) => {
             state.loading = false
         },
