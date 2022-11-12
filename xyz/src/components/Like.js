@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { DeleteOptionApiAction } from '../redux/action/action';
+import { PostVoteApiAction } from '../redux/action/action';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-const DeleteOption = ({ id, ids }) => {
+const Like = ({ idd, idss, iddd }) => {
+
     const [shows, setShows] = useState(false);
 
     const handleCloses = () => {
@@ -17,33 +20,34 @@ const DeleteOption = ({ id, ids }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        dispatch(DeleteOptionApiAction(id))
-        navigate('/homes')
+        dispatch(PostVoteApiAction(idd))
+        navigate(`/chart/${iddd}`)
     }
 
     return (
-        <>
-            <button
-                className="remove"
-                value={ids}
-                onClick={handleShows}>
-                X
-            </button>
+        <div>
+            <FontAwesomeIcon
+                className='like'
+                value={idss}
+                onClick={handleShows}
+                icon={faThumbsUp}
+            />
+
             <Modal
                 show={shows}
                 onHide={handleCloses}
                 backdrop="static"
                 keyboard={false}
             >
-            
+
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Delete Option
+                        Confirm Voting
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Are you sure you want to delete this option?
-                    Once you click on Confirm Delete, you cannot Undo it!
+                    Click on View Results to check the number of votes!
+                    If you do not want to vote click on close.
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
@@ -54,13 +58,14 @@ const DeleteOption = ({ id, ids }) => {
                     <Button
                         onClick={handleClick}
                         variant="primary">
-                        Confirm Delete
+                        View Results
                     </Button>
 
                 </Modal.Footer>
             </Modal>
-        </>
+
+        </div>
     )
 }
 
-export default DeleteOption
+export default Like

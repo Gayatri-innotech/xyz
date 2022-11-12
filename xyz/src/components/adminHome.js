@@ -6,7 +6,9 @@ import { logout } from '../redux/reducer/authSlice';
 import Edit from './Edit';
 import Delete from './Delete';
 import DeleteOption from './DeleteOption';
+import Like from './Like';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { icon } from '@fortawesome/fontawesome-svg-core';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 const AdminHome = () => {
@@ -16,6 +18,7 @@ const AdminHome = () => {
     const responseData = useSelector((state) => state.reducer.details);
     const dispatch = useDispatch();
 
+
     const handleOut = () => {
         dispatch(logout())
         navigate('/')
@@ -24,7 +27,6 @@ const AdminHome = () => {
     useEffect(() => {
         dispatch(GetApiAction());
     }, [dispatch]);
-
 
     const result = responseData ? responseData.map((data, index) => {
         return (
@@ -43,7 +45,6 @@ const AdminHome = () => {
                         </span>
                     </h5>
                     <div className="card-body">
-
                         {data.options.map((item, index) =>
                             <h6 key={index}>
                                 <span >
@@ -51,11 +52,16 @@ const AdminHome = () => {
                                         name={data['_id']}
                                         value={item.option} />
 
-                                    <FontAwesomeIcon
+                                    {/* <FontAwesomeIcon
                                         className='like'
                                         onClick={() =>
                                             dispatch(PostVoteApiAction({ id: data._id, option: item.option }))}
                                         icon={faThumbsUp}
+                                    /> */}
+                                    <Like
+                                        idd = {{id: data._id, option: item.option}}
+                                        idss = {item.option}
+                                        iddd = {data._id}
                                     />
 
                                     {

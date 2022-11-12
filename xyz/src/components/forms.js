@@ -68,7 +68,7 @@ export const Forms = () => {
             navigate('/homes')
         }
     };
-
+        
     return (
         <div className='container add'>
             <h1>Add New Poll</h1>

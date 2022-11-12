@@ -69,11 +69,12 @@ table{
 
 .error {
   color:#660000;
-  width: 100%;
+  width: 30%;
   height: 30px;
   margin-top: 10px;
   padding: 3px;
-  float: left;
+  background: #f3d8da;
+  border-radius: 5px;
 }
 
 .form{
@@ -102,7 +103,6 @@ table{
 }
 
 .sub {
-  background: white;
   margin-top: 20px;
 }
 
@@ -116,24 +116,42 @@ table{
 .contain {
   border: 1px solid white;
   background: white;
-  margin: 50px;
+  margin-top: 25px;
+  margin-right: 50px;
+  margin-left: 50px;
   border-radius: 15px;
   padding-bottom: 40px;
   height: 100%;
 }
 
+.cols{
+  background: white;
+  padding-top: 30px;
+}
+
 .boxe {
   background: white;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 900;
+  float: left;
+  margin-left: 20px;
+  text-decoration: underline;
+}
+
+.boxee {
+  background: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 900;
+  margin-right: 5px;
 }
 
 .boxes {
-  width: 30%;
+  width: 90%;
   height: 25px;
   border: none;
   background-color: white;
-  border-bottom: 1px solid black;
-  margin-top: 8px;
+  border-bottom: 1px solid lightgray;
+  margin-top: 25px;
 }
 
 .btn1 {

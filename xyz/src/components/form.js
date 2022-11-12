@@ -48,7 +48,6 @@ export const Forms1 = () => {
         navigate('/homes')
     };
 }
-
     return (
         <div className='container add'>
             <h1>Add New Option</h1>

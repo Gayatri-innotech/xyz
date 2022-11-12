@@ -15,7 +15,7 @@ const Login = () => {
 
   const handleLogin = () => {
     console.log(username, pass)
-    if (username && username?.length === 0 && pass?.length === 0) {
+    if (username?.length === 0 && pass?.length === 0) {
       setError(true)
     } else {
       dispatch(signInUser({ username, pass }))
@@ -28,86 +28,86 @@ const Login = () => {
     }
   }, [authState])
 
-
   return <>
     {
       authState?.user ?
         <Navigate to="/homes" /> :
-        <div className='contain'>
-          <h2
-            className='sub'>
+        <div>
+          <h2 className='sub'>
             Login Page
           </h2>
-          <hr />
-          {authState.error}<br />
 
-          <label
-            htmlFor=''
-            className='boxe'>
-            Username
-          </label>
-          <br />
+          <div className='contain'>
+            {authState.error}<br />
 
-          <input
-            type='text'
-            className='boxes'
-            placeholder='Username'
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <br />
+            <label
+              htmlFor=''
+              className='boxe'>
+              Username
+            </label>
+            <br />
 
-          {
-            error && username.length <= 0 ?
-              <label
-                className='error'>
-                Username can't be empty!
-              </label> : ''
-          }
-          <br /><br />
+            <input
+              type='text'
+              className='boxes'
+              placeholder='Username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <br />
 
-          <label
-            htmlFor=''
-            className='boxe'>
-            Password
-          </label>
-          <br />
+            {
+              error && username.length <= 0 ?
+                <label
+                  className='error'>
+                  Username can't be empty!
+                </label> : ''
+            }
+            <br /><br />
 
-          <input
-            type='password'
-            className='boxes'
-            placeholder='Password'
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
-          />
-          <br />
+            <label
+              htmlFor=''
+              className='boxe'>
+              Password
+            </label>
+            <br />
 
-          {
-            error && pass.length <= 0 ?
-              <label
-                className='error'>
-                Password can't be empty!
-              </label> : ''
-          }
-          <br /><br />
+            <input
+              type='password'
+              className='boxes'
+              placeholder='Password'
+              value={pass}
+              onChange={(e) => setPass(e.target.value)}
+            />
+            <br />
 
-          <button
-            type='submit'
-            className='btn1'
-            onClick={handleLogin}>
-            Login
-          </button>
+            {
+              error && pass.length <= 0 ?
+                <label
+                  className='error'>
+                  Password can't be empty!
+                </label> : ''
+            }
+            <br /><br />
 
-          <p
-            className='boxx'>
-            Do not have an account?
-          </p>
-          
-          <NavLink
-            to='/reg'
-            className='btns'>
-            Sign Up
-          </NavLink>
+            <button
+              type='submit'
+              className='btn1'
+              onClick={handleLogin}>
+              Login
+            </button>
+
+            <p
+              className='boxx'>
+              Do not have an account?
+            </p>
+
+            <NavLink
+              to='/reg'
+              className='btns'>
+              Sign Up
+            </NavLink>
+          </div>
         </div>
     }
   </>

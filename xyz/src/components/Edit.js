@@ -8,8 +8,7 @@ const Edit = ({ id }) => {
         <Link to={`/edit/${id}`}>
             <FontAwesomeIcon 
             className='pen' 
-            icon={faPen} 
-            />
+            icon={faPen} />
         </Link>
     )
 }

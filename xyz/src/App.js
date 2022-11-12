@@ -10,6 +10,7 @@ import Users from './components/users';
 import Login from './components/Login';
 import Register from './components/Register';
 import Form from './components/form';
+import Result from './components/Result';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
             <Route path='/form' element={<Forms />} />
             <Route path='/forms/:id' element={<Form />} />
             <Route path='/user' element={<Users />} />
+            <Route path='/chart/:id' element={<Result/>}/>
             <Route path='/edit/:id' element={<UpdateDetails />} />
             <Route path='*' element={<p>There's nothing here: 404</p>} />
           </Routes>

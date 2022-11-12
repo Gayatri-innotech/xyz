@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { signUpUser } from '../redux/reducer/authSlice';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleExclamation, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Register = () => {
   
@@ -38,14 +40,15 @@ const Register = () => {
   }, [authSign])
 
   return (
+    <>
+    <h2
+        className='sub'>
+        Register User
+      </h2>
     <div
       className='contain'>
-      <h2
-        className='sub'>
-        Register
-      </h2>
 
-      <form
+      <form className='cols'
         onSubmit={handleSubmit(onSubmit)}>
 
         <label
@@ -95,12 +98,13 @@ const Register = () => {
               className='error'>
               Password can't be empty!
             </label> : ''
+            
         }
         <br /><br />
 
         <label
           htmlFor=''
-          className='boxe'>
+          className='boxee'>
           User
         </label>
 
@@ -117,7 +121,7 @@ const Register = () => {
 
         <label
           htmlFor=''
-          className='boxe'>
+          className='boxee'>
           Admin
         </label>
 
@@ -137,7 +141,7 @@ const Register = () => {
             {errors.userType.message}
           </span>
         }
-        <br /><br />
+        <br />
 
         <button
           onClick={registerHandle}
@@ -158,6 +162,7 @@ const Register = () => {
       </div>
 
     </div>
+    </>
   )
 }
 
